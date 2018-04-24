@@ -41,6 +41,14 @@ public class GenericApiHelper {
         return gson;
     }
 
+    /**
+     *
+     * @param context
+     * @param domain
+     * @param endpoint
+     * @param requestParams
+     * @return
+     */
     private String decorateUrl(Context context, final String domain, final String endpoint, final Map<String,String> requestParams) {
         String url = domain + endpoint;
 
@@ -55,6 +63,20 @@ public class GenericApiHelper {
         return url;
     }
 
+    /**
+     * method to make REST API request
+     * @param context
+     * @param method: Request.Method.*
+     * @param domain: API domain address
+     * @param endpoint: API endpoint
+     * @param header: request header
+     * @param requestParams: parameters append to url
+     * @param requestObject: GeneralRequest object which will be parse to json by gson
+     * @param responseObjectClazz: GeneralReponse class which allow the api response to be parse back to java object
+     * @param responseCode: User definded integer to identify which API it is responding to
+     * @param outTime: API connection time out
+     * @param apiResponseListener: API callback listener for listening to success and fail api call
+     */
     protected void call(final Context context, int method, final String domain, final String endpoint, final Map<String,String> header, final Map<String,String> requestParams, final GeneralRequest requestObject, final Class<?> responseObjectClazz, final int responseCode, final int outTime, final ApiResponseListener apiResponseListener) {
 
         String url = decorateUrl(context,domain, endpoint,requestParams);
@@ -64,12 +86,17 @@ public class GenericApiHelper {
         StringRequest stringRequest = new StringRequest(method, url,
                 new Response.Listener<String>() {
                     @Override
+                    //On API success return
                     public void onResponse(String response) {
                         Log.d(TAG, endpoint + "response:" + response);
                         if(apiResponseListener != null) {
+
+                            //try parsing json response to response object
                             try {
                                 Object responseObj = gson.fromJson(response,(Class<?>) responseObjectClazz);
                                 Log.d(TAG, "responseObj:" + responseObj.toString());
+
+                                //cast response object to GeneralResponse and return to listener
                                 if(responseObj instanceof GeneralResponse) {
                                     GeneralResponse generalResponse = (GeneralResponse) responseObj;
                                     apiResponseListener.onApiResponse(responseCode, generalResponse);
@@ -98,6 +125,7 @@ public class GenericApiHelper {
             public byte[] getBody() throws AuthFailureError {
                 if(requestObject != null) {
                     try {
+                        //parse request object to json format and send as request body
                         return gson.toJson(requestObject).getBytes();
                     } catch (Exception e) {
                         Log.e(TAG, "error parsing request body to json");
