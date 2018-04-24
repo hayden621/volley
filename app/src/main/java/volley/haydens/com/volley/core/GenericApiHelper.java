@@ -26,9 +26,9 @@ public class GenericApiHelper {
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
 
-    public interface ApiResponseListener {
+    protected interface ApiResponseListener {
         void onApiResponse(int responseCode, GeneralResponse response);
-        void onApiError(String errorMsg);
+        void onApiError(int responseCode, String errorMsg);
     }
 
     private static final String TAG = GenericApiHelper.class.getName();
@@ -76,11 +76,11 @@ public class GenericApiHelper {
                                 }
                                 else {
                                     String errorMsg = "error parsing response to GeneralResponse";
-                                    apiResponseListener.onApiError(errorMsg);
+                                    apiResponseListener.onApiError(responseCode, errorMsg);
                                 }
                             }
                             catch(JsonSyntaxException e) {
-                                apiResponseListener.onApiError(e.toString());
+                                apiResponseListener.onApiError(responseCode, e.toString());
                             }
                         }
                     }
@@ -90,7 +90,7 @@ public class GenericApiHelper {
                 Log.e(TAG, "error calling:[" + endpoint + "], error:" + error.toString());
 
                 if(apiResponseListener != null) {
-                    apiResponseListener.onApiError(error.toString());
+                    apiResponseListener.onApiError(responseCode, error.toString());
                 }
             }
         }) {

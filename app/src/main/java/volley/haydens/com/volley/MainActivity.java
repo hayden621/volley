@@ -13,7 +13,7 @@ import volley.haydens.com.volley.core.GenericApiHelper;
 import volley.haydens.com.volley.model.Data;
 import volley.haydens.com.volley.model.SampleResponse;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SampleApiHelper.SampleApiCallbackListener{
 
     TextView firstNameTextView;
     TextView lastNameTextView;
@@ -34,21 +34,32 @@ public class MainActivity extends AppCompatActivity {
                 null,
                 SampleResponse.class,
                 SAMPLE_API_RESPONSE_CODE,
-                new SampleApiHelper.SampleApiCallbackListener() {
-                    @Override
-                    public void onApiError(String errorMsg) {
+                this);
+    }
 
-                    }
+    @Override
+    public void onApiResponse(int responseCode, GeneralResponse response) {
+        switch (responseCode) {
+            case SAMPLE_API_RESPONSE_CODE:
+                handleSampleResponse(response);
+                break;
+        }
+    }
 
-                    @Override
-                    public void onApiResponse(int responseCode, GeneralResponse response) {
-                        if(response instanceof SampleResponse) {
-                            SampleResponse sampleResponse = (SampleResponse) response;
+    @Override
+    public void onApiError(int responseCode, String errorMsg) {
+        switch (responseCode) {
+            case SAMPLE_API_RESPONSE_CODE:
+                break;
+        }
+    }
 
-                            firstNameTextView.setText("First name:" + sampleResponse.getData().getFirst_name());
-                            lastNameTextView.setText("Last name:" + sampleResponse.getData().getLast_name());
-                        }
-                    }
-                });
+    private void handleSampleResponse(GeneralResponse response) {
+        if(response instanceof SampleResponse) {
+            SampleResponse sampleResponse = (SampleResponse) response;
+
+            firstNameTextView.setText("First name:" + sampleResponse.getData().getFirst_name());
+            lastNameTextView.setText("Last name:" + sampleResponse.getData().getLast_name());
+        }
     }
 }
