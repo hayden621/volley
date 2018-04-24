@@ -7,8 +7,8 @@ import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.haydens.nidotalk.BuildConfig;
-import com.haydens.nidotalk.R;
+
+import volley.haydens.com.volley.R;
 
 /**
  * Created by lipy on 9/11/2017.
