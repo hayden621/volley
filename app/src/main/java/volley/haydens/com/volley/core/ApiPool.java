@@ -8,8 +8,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import volley.haydens.com.volley.R;
-
 /**
  * Created by lipy on 9/11/2017.
  */
@@ -44,9 +42,4 @@ public class ApiPool {
 
         queue.add(stringRequest);
     }
-
-    public static String getApiDomain(Context context) {
-        return context.getString(R.string.api_domain);
-    }
-
 }

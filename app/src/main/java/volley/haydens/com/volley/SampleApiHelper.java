@@ -4,17 +4,11 @@ import android.content.Context;
 
 import java.util.Map;
 
-import volley.haydens.com.volley.core.GeneralResponse;
 import volley.haydens.com.volley.core.GenericApiHelper;
 
 public class SampleApiHelper extends GenericApiHelper {
 
     public interface SampleApiCallbackListener extends ApiResponseListener {
-        @Override
-        void onApiError(String errorMsg);
-
-        @Override
-        void onApiResponse(int responseCode, GeneralResponse response);
     }
 
 
@@ -30,6 +24,6 @@ public class SampleApiHelper extends GenericApiHelper {
     }
 
     public void call(final Context context, final int method, final String endpoint, final Map<String,String> requestParams, final Class<?> responseObjectClazz, final int responseCode, final SampleApiCallbackListener apiResponseListener) {
-        call(context, method, endpoint, null, requestParams, null, responseObjectClazz, responseCode, DEFAULT_TIME, apiResponseListener);
+        call(context, method, context.getResources().getString(R.string.api_domain), endpoint, null, requestParams, null, responseObjectClazz, responseCode, DEFAULT_TIME, apiResponseListener);
     }
 }

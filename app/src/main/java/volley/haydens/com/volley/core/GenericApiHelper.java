@@ -41,8 +41,8 @@ public class GenericApiHelper {
         return gson;
     }
 
-    private String decorateUrl(Context context, final String endpoint, final Map<String,String> requestParams) {
-        String url = ApiPool.getApiDomain(context) + endpoint;
+    private String decorateUrl(Context context, final String domain, final String endpoint, final Map<String,String> requestParams) {
+        String url = domain + endpoint;
 
         if(requestParams != null) {
             url = url + "?";
@@ -55,9 +55,9 @@ public class GenericApiHelper {
         return url;
     }
 
-    protected void call(final Context context, int method, final String endpoint, final Map<String,String> header, final Map<String,String> requestParams, final GeneralRequest requestObject, final Class<?> responseObjectClazz, final int responseCode, final int outTime, final ApiResponseListener apiResponseListener) {
+    protected void call(final Context context, int method, final String domain, final String endpoint, final Map<String,String> header, final Map<String,String> requestParams, final GeneralRequest requestObject, final Class<?> responseObjectClazz, final int responseCode, final int outTime, final ApiResponseListener apiResponseListener) {
 
-        String url = decorateUrl(context,endpoint,requestParams);
+        String url = decorateUrl(context,domain, endpoint,requestParams);
 
         Log.d(TAG, "url: " + url);
         // Request a string response from the provided URL.
