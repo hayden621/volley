@@ -1,10 +1,9 @@
-# Preview
 A tutorial on how to use volley and gson with android. Thanks to https://reqres.in/api/ (https://github.com/benhowdle89/reqres) for API demostration
 
-### Pre-request
+# Pre-request
 Create empty android project
 
-## Preparation
+# Preparation
 1. Add volley library to gradle
 ```
 implementation 'com.android.volley:volley:1.0.0'
@@ -16,21 +15,20 @@ implementation 'com.google.code.gson:gson:2.4'
 ```
 
 3. Add internet permission to manifest.xml
-```
-<uses-permission android:name="android.permission.INTERNET" />
-```
 
-## Core Class
-### ApiPool - Centralized pool for api request queue
-### CookieHelper - For handling cookies in request header (not normally required)
-### GeneralRequest - Mother class for all request object
-### GeneralResponse - Mother class for all response object
-### GenericApiHelper - A generic helper class to make api call
-### SharedPreferenceHelper - For storing cookies in shared preference
 
-## Sample API call with Core classes
+# Core Class
+ApiPool - Centralized pool for api request queue
+CookieHelper - For handling cookies in request header (not normally required)
+GeneralRequest - Mother class for all request object
+GeneralResponse - Mother class for all response object
+GenericApiHelper - A generic helper class to make api call
+SharedPreferenceHelper - For storing cookies in shared preference
+
+# Sample API call with Core classes
 At MainActivity, make API call to https://reqres.in/api/users/2 with response as below, then display returned first and last name
 ```
+//json
 {
     "data": {
         "id": 2,
@@ -49,10 +47,11 @@ At MainActivity, make API call to https://reqres.in/api/users/2 with response as
 7. The response code is used to identify which API it responses to(as multiple api call can be made)
 8. Handle the response at onApiResponse() and onApiError() 
 
-## Understanding core classes
-### GenericApiHelper
-#### call()
+# Understanding core classes
+## GenericApiHelper
+
 ```
+//JAVA method call()
 /**
      * method to make REST API request
      * @param context
@@ -166,7 +165,7 @@ At MainActivity, make API call to https://reqres.in/api/users/2 with response as
 ```
 call() method is the core function to make api call. To use this method, you should create a child class of it and exposes the call method.
 
-#### decorateUrl()
+## decorateUrl()
 ```
  private String decorateUrl(Context context, final String domain, final String endpoint, final Map<String,String> requestParams) {
         String url = domain + endpoint;
