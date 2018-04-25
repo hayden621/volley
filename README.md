@@ -44,8 +44,8 @@ At MainActivity, make API call to https://reqres.in/api/users/2 with response as
 2. Overload call() method with pre-defined api domain address and api time out
 3. Create interface for SampleApiCallbackListener which extends ApiResponseListener
 4. Create Data and SampleResponse according to api response in step 1, you can use (http://www.jsonschema2pojo.org/) to generate pojo from json
-5. At MainActivity, implements SampleApiCallbackListener and generates the override methods according
-6. Use SampleApiHelper to make call to https://reqres.in/api/users/2, which a self defined response code
+5. At MainActivity, implements SampleApiCallbackListener and generates the override methods accordingly
+6. Use SampleApiHelper to make call to https://reqres.in/api/users/2, which is a self defined response code
 7. The response code is used to identify which API it responses to(as multiple api call can be made)
 8. Handle the response at onApiResponse() and onApiError() 
 
