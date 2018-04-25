@@ -18,12 +18,12 @@ implementation 'com.google.code.gson:gson:2.4'
 
 
 # Core Class
-ApiPool - Centralized pool for api request queue
-CookieHelper - For handling cookies in request header (not normally required)
-GeneralRequest - Mother class for all request object
-GeneralResponse - Mother class for all response object
-GenericApiHelper - A generic helper class to make api call
-SharedPreferenceHelper - For storing cookies in shared preference
+1.ApiPool - Centralized pool for api request queue
+2.CookieHelper - For handling cookies in request header (not normally required)
+3.GeneralRequest - Mother class for all request object
+4.GeneralResponse - Mother class for all response object
+5.GenericApiHelper - A generic helper class to make api call
+6.SharedPreferenceHelper - For storing cookies in shared preference
 
 # Sample API call with Core classes
 At MainActivity, make API call to https://reqres.in/api/users/2 with response as below, then display returned first and last name
